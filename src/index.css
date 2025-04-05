@@ -1,0 +1,321 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 250 33% 97%;
+    --foreground: 250 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 250 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 250 10% 10%;
+
+    --primary: 250 60% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 250 30% 90%;
+    --secondary-foreground: 250 30% 20%;
+
+    --muted: 250 20% 92%;
+    --muted-foreground: 250 10% 40%;
+
+    --accent: 280 60% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 250 20% 85%;
+    --input: 250 20% 85%;
+    --ring: 250 60% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 250 20% 6%;
+    --foreground: 250 10% 95%;
+
+    --card: 250 20% 10%;
+    --card-foreground: 250 10% 95%;
+
+    --popover: 250 20% 10%;
+    --popover-foreground: 250 10% 95%;
+
+    --primary: 250 60% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 250 20% 15%;
+    --secondary-foreground: 250 10% 90%;
+
+    --muted: 250 20% 15%;
+    --muted-foreground: 250 10% 70%;
+
+    --accent: 280 60% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 250 20% 20%;
+    --input: 250 20% 20%;
+    --ring: 250 60% 50%;
+  }
+}
+
+@layer components {
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"],
+  [tabindex]:not([tabindex="-1"]) {
+    cursor: none !important;
+  }
+
+  .variant-success {
+    background-color: rgb(34, 197, 94);
+    color: white;
+  }
+
+  .variant-success:hover {
+    background-color: rgb(22, 163, 74);
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.text-animate {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@layer base {
+  :root {
+    --background: 250 33% 97%;
+    --foreground: 250 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 250 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 250 10% 10%;
+
+    --primary: 250 60% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 250 30% 90%;
+    --secondary-foreground: 250 30% 20%;
+
+    --muted: 250 20% 92%;
+    --muted-foreground: 250 10% 40%;
+
+    --accent: 280 60% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 250 20% 85%;
+    --input: 250 20% 85%;
+    --ring: 250 60% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 250 20% 6%;
+    --foreground: 250 10% 95%;
+
+    --card: 250 20% 10%;
+    --card-foreground: 250 10% 95%;
+
+    --popover: 250 20% 10%;
+    --popover-foreground: 250 10% 95%;
+
+    --primary: 250 60% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 250 20% 15%;
+    --secondary-foreground: 250 10% 90%;
+
+    --muted: 250 20% 15%;
+    --muted-foreground: 250 10% 70%;
+
+    --accent: 280 60% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 250 20% 20%;
+    --input: 250 20% 20%;
+    --ring: 250 60% 50%;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* normal CSS
+
+/* Base styles */
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Component styles */
+.glass {
+  background-color: hsl(var(--background) / 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.75rem; /* rounded-xl */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+}
+
+.card-hover {
+  transition: all 0.3s;
+}
+
+.card-hover:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1); /* hover:shadow-lg */
+  transform: translateY(-0.25rem); /* hover:-translate-y-1 */
+}
+
+/* Gradient backgrounds */
+.gradient-purple {
+  background-image: linear-gradient(
+    to bottom right,
+    hsl(var(--primary)),
+    hsl(var(--accent))
+  );
+}
+
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    hsl(var(--primary)),
+    hsl(var(--accent))
+  );
+}
+
+/* Interactive item */
+.interactive-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem; /* rounded-lg */
+  transition: all 0.3s;
+}
+
+.interactive-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    to right,
+    hsl(var(--accent) / 0.2),
+    hsl(var(--primary) / 0.2)
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.interactive-item:hover::before {
+  opacity: 1;
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+  .glass {
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  section {
+    padding: 3rem 1rem;
+  }
+
+  .text-2xl {
+    font-size: 1.25rem; /* text-xl */
+  }
+
+  .text-3xl {
+    font-size: 1.5rem; /* text-2xl */
+  }
+
+  .text-4xl {
+    font-size: 1.875rem; /* text-3xl */
+  }
+
+  .perspective-1000 {
+    perspective: 700px;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1023px) {
+  section {
+    padding: 4rem 1.5rem;
+  }
+
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .grid-cols-3 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* grid-cols-2 */
+    gap: 1rem; /* Optional spacing between columns */
+  }
+}
