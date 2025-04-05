@@ -11,8 +11,7 @@ const CustomCursor: React.FC = () => {
     const { theme } = useTheme();
 
     useEffect(() => {
-        // Hide the default cursor
-        document.body.style.cursor = 'none';
+
 
         const addEventListeners = () => {
             document.addEventListener('mousemove', onMouseMove);
