@@ -63,10 +63,9 @@ const Header: React.FC = () => {
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass shadow-lg' : 'bg-transparent'}`}>
             <div className="container mx-auto px-4 py-4">
                 <div className="flex justify-between items-center">
-                    {/* Logo */}
+
                     <div className="text-2xl font-bold gradient-text">Portfolio</div>
 
-                    {/* Desktop Navigation */}
                     <nav className="hidden md:flex space-x-8">
                         <button onClick={() => scrollToSection('profile')} className="hover:text-primary transition-colors">
                             {t('nav.home')}
@@ -81,7 +80,6 @@ const Header: React.FC = () => {
                             {t('nav.contact')}
                         </button>
 
-                        {/* Interactive menu item with special styling */}
                         <motion.button
                             onClick={() => scrollToSection('interactive')}
                             className="relative rounded-md px-4 py-1 text-accent-foreground font-medium"
@@ -108,7 +106,6 @@ const Header: React.FC = () => {
                         </motion.button>
                     </nav>
 
-                    {/* Controls */}
                     <div className="hidden md:flex items-center space-x-4">
                         <button
                             onClick={toggleLanguage}
@@ -128,7 +125,6 @@ const Header: React.FC = () => {
                         </button>
                     </div>
 
-                    {/* Mobile Menu Button */}
                     <button
                         className="md:hidden p-2"
                         onClick={toggleMenu}
