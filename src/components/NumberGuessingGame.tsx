@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from '@/hooks/use-toast';
 import { Joystick } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 const NumberGuessingGame = () => {
@@ -13,14 +12,13 @@ const NumberGuessingGame = () => {
     const [attempts, setAttempts] = useState(0);
     const [message, setMessage] = useState('');
     const [gameWon, setGameWon] = useState(false);
-
     const handleGuess = () => {
         const userGuess = parseInt(guess);
 
         if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
             toast({
-                title: t('interactive.numberGame.invalidGuess'),
-                description: t('interactive.numberGame.invalidRange'),
+                title: "Invalid guess",
+                description: "Please enter a number between 1 and 100.",
                 variant: "destructive",
             });
             return;
@@ -32,8 +30,8 @@ const NumberGuessingGame = () => {
             setMessage(t('interactive.numberGame.correct'));
             setGameWon(true);
             toast({
-                title: t('interactive.numberGame.congrats'),
-                description: t('interactive.numberGame.wonIn', { attempts: attempts + 1 }),
+                title: "Congratulations!",
+                description: "You guessed the correct number in " + attempts + " attempts.",
             });
         } else if (userGuess < targetNumber) {
             setMessage(t('interactive.numberGame.higher'));
@@ -57,7 +55,7 @@ const NumberGuessingGame = () => {
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                     <Joystick className="h-5 w-5" />
-                    {t('interactive.numberGame.title')}
+                    {t('interactive.numberGame.tab')}
                 </CardTitle>
                 <CardDescription>{t('interactive.numberGame.description')}</CardDescription>
             </CardHeader>
@@ -72,7 +70,7 @@ const NumberGuessingGame = () => {
                             type="number"
                             value={guess}
                             onChange={(e) => setGuess(e.target.value)}
-                            className="w-full p-2 border rounded-md"
+                            className="w-full p-2 border rounded-md text-black"
                             placeholder="1-100"
                             disabled={gameWon}
                         />
@@ -82,18 +80,20 @@ const NumberGuessingGame = () => {
                             <p>{message}</p>
                         </div>
                     )}
-                    <p>{t('interactive.numberGame.attempts')}: {attempts}</p>
+                    <p>{t('interactive.numberGame.attempts')} {attempts}</p>
                 </div>
             </CardContent>
             <CardFooter>
                 {!gameWon ? (
-                    <Button onClick={handleGuess}>
+                    <div onClick={handleGuess} className="px-6 mb-4 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
                         {t('interactive.numberGame.guess')}
-                    </Button>
+                    </div>
+
                 ) : (
-                    <Button onClick={resetGame}>
+                    <div onClick={resetGame} className="px-6 mb-4 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
                         {t('interactive.numberGame.playAgain')}
-                    </Button>
+                    </div>
+
                 )}
             </CardFooter>
         </Card>

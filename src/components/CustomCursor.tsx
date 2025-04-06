@@ -11,8 +11,6 @@ const CustomCursor: React.FC = () => {
     const { theme } = useTheme();
 
     useEffect(() => {
-
-
         const addEventListeners = () => {
             document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('mouseenter', onMouseEnter);
@@ -56,6 +54,8 @@ const CustomCursor: React.FC = () => {
                     element.addEventListener('mouseenter', () => setLinkHovered(true));
                     element.addEventListener('mouseleave', () => setLinkHovered(false));
                 });
+
+
         };
 
         addEventListeners();
@@ -96,12 +96,13 @@ const CustomCursor: React.FC = () => {
             {cursorCircles.map((circle, index) => (
                 <motion.div
                     key={index}
-                    className="custom-cursor fixed pointer-events-none z-50"
+                    className="custom-cursor fixed z-50"
                     animate={{
                         x: position.x + (clicked ? circle.offset * 0.5 : circle.offset),
                         y: position.y + (clicked ? circle.offset * 0.5 : circle.offset),
                         scale: hidden ? 0 : clicked ? 0.8 : linkHovered ? 1.5 : 1,
-                        opacity: hidden ? 0 : 1
+                        opacity: hidden ? 0 : 1,
+                        display: linkHovered ? 'none' : 'block'
                     }}
                     transition={{
                         duration: 0.15,
@@ -111,7 +112,7 @@ const CustomCursor: React.FC = () => {
                     style={{
                         width: circle.size,
                         height: circle.size,
-                        borderRadius: '50%',
+                        borderRadius: linkHovered ? '8px' : '50%',
                         backgroundColor: circle.color,
                         opacity: circle.opacity,
                         mixBlendMode: theme === 'dark' ? 'screen' : 'multiply',
@@ -120,7 +121,8 @@ const CustomCursor: React.FC = () => {
                         top: 0,
                         left: 0,
                         transform: 'translate(-50%, -50%)',
-                        boxShadow: `0 0 ${circle.size / 2}px ${circle.color}`
+                        pointerEvents: 'none',
+                        boxShadow: `0 0 ${circle.size / 2}px ${circle.color}`,
                     }}
                 />
             ))}

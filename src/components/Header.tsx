@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useLanguage, Language } from '@/contexts/LanguageContext';
@@ -60,34 +59,35 @@ const Header: React.FC = () => {
     };
 
     return (
-        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass shadow-lg' : 'bg-transparent'}`}>
+        <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? 'glass shadow-lg' : 'bg-transparent'}`}>
             <div className="container mx-auto px-4 py-4">
                 <div className="flex justify-between items-center">
 
-                    <div className="text-2xl font-bold gradient-text">Portfolio</div>
+                    <div onClick={() => window.location.reload()} className="text-2xl font-bold gradient-text cursor-pointer">Portfolio</div>
 
                     <nav className="hidden md:flex space-x-8">
-                        <button onClick={() => scrollToSection('profile')} className="hover:text-primary transition-colors">
+                        <div onClick={() => scrollToSection('profile')} className="hover:text-primary transition-colors cursor-pointer">
                             {t('nav.home')}
-                        </button>
-                        <button onClick={() => scrollToSection('skills')} className="hover:text-primary transition-colors">
+                        </div>
+                        <div onClick={() => scrollToSection('skills')} className="hover:text-primary transition-colors cursor-pointer">
                             {t('nav.skills')}
-                        </button>
-                        <button onClick={() => scrollToSection('projects')} className="hover:text-primary transition-colors">
+                        </div>
+                        <div onClick={() => scrollToSection('projects')} className="hover:text-primary transition-colors cursor-pointer">
                             {t('nav.projects')}
-                        </button>
-                        <button onClick={() => scrollToSection('contact')} className="hover:text-primary transition-colors">
+                        </div>
+                        <div onClick={() => scrollToSection('contact')} className="hover:text-primary transition-colors cursor-pointer">
                             {t('nav.contact')}
-                        </button>
+                        </div>
 
-                        <motion.button
+
+                        <motion.div
                             onClick={() => scrollToSection('interactive')}
-                            className="relative rounded-md px-4 py-1 text-accent-foreground font-medium"
+                            className="relative rounded-md px-4 py-1 text-accent-foreground font-medium cursor-pointer"
                             animate={pulseAnimation}
                             whileHover="hover"
                             variants={glowVariants}
                         >
-                            <span className="flex items-center gap-1">
+                            <span className={`${theme === 'dark' ? '' : 'text-black'} flex items-center gap-1`}>
                                 <Sparkles className="h-4 w-4" />
                                 {t('nav.interactive')}
                             </span>
@@ -95,34 +95,32 @@ const Header: React.FC = () => {
                                 className="absolute inset-0 rounded-md -z-10 opacity-50"
                                 animate={{
                                     background: [
-                                        `linear-gradient(90deg, ${theme === 'dark' ? '#9333ea' : '#c084fc'} 0%, ${theme === 'dark' ? '#4f46e5' : '#818cf8'} 100%)`,
-                                        `linear-gradient(180deg, ${theme === 'dark' ? '#9333ea' : '#c084fc'} 0%, ${theme === 'dark' ? '#4f46e5' : '#818cf8'} 100%)`,
-                                        `linear-gradient(270deg, ${theme === 'dark' ? '#9333ea' : '#c084fc'} 0%, ${theme === 'dark' ? '#4f46e5' : '#818cf8'} 100%)`,
-                                        `linear-gradient(0deg, ${theme === 'dark' ? '#9333ea' : '#c084fc'} 0%, ${theme === 'dark' ? '#4f46e5' : '#818cf8'} 100%)`
+                                        `linear-gradient(90deg, ${theme === 'dark' ? '#9333ea' : '#9333ea'} 0%, ${theme === 'dark' ? '#4f46e5' : '#4f46e5'} 100%)`,
+                                        `linear-gradient(180deg, ${theme === 'dark' ? '#9333ea' : '#9333ea'} 0%, ${theme === 'dark' ? '#4f46e5' : '#4f46e5'} 100%)`,
+                                        `linear-gradient(270deg, ${theme === 'dark' ? '#9333ea' : '#9333ea'} 0%, ${theme === 'dark' ? '#4f46e5' : '#4f46e5'} 100%)`,
+                                        `linear-gradient(0deg, ${theme === 'dark' ? '#9333ea' : '#9333ea'} 0%, ${theme === 'dark' ? '#4f46e5' : '#4f46e5'} 100%)`,
                                     ]
                                 }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                             />
-                        </motion.button>
+                        </motion.div>
                     </nav>
 
                     <div className="hidden md:flex items-center space-x-4">
-                        <button
-                            onClick={toggleLanguage}
-                            className="p-2 rounded-full hover:bg-secondary transition-colors"
-                            aria-label="Toggle language"
-                        >
+                        <div onClick={toggleLanguage} className='flex justify-center items-center cursor-pointer'>
+                            <button
+                                className="p-2 rounded-full hover:bg-secondary transition-colors"
+                                aria-label="Toggle language"
+                            >
+                            </button>
                             <Globe size={20} />
                             <span className="ml-1">{language.toUpperCase()}</span>
-                        </button>
 
-                        <button
-                            onClick={toggleTheme}
-                            className="p-2 rounded-full hover:bg-secondary transition-colors"
-                            aria-label="Toggle theme"
-                        >
+                        </div>
+                        <div onClick={toggleTheme} className="p-2 rounded-full hover:bg-secondary  transition-colors cursor-pointer"
+                            aria-label="Toggle theme">
                             {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-                        </button>
+                        </div>
                     </div>
 
                     <button
@@ -139,27 +137,27 @@ const Header: React.FC = () => {
             {isMenuOpen && (
                 <div className="md:hidden px-4 pb-4 glass">
                     <nav className="flex flex-col space-y-4">
-                        <button onClick={() => scrollToSection('profile')} className="py-2 hover:text-primary transition-colors">
+                        <div onClick={() => scrollToSection('profile')} className="text-center py-2 hover:text-primary transition-colors cursor-pointer">
                             {t('nav.home')}
-                        </button>
-                        <button onClick={() => scrollToSection('skills')} className="py-2 hover:text-primary transition-colors">
+                        </div>
+                        <div onClick={() => scrollToSection('skills')} className="text-center py-2 hover:text-primary transition-colors cursor-pointer">
                             {t('nav.skills')}
-                        </button>
-                        <button onClick={() => scrollToSection('projects')} className="py-2 hover:text-primary transition-colors">
-                            {t('nav.projects')}
-                        </button>
-                        <button onClick={() => scrollToSection('contact')} className="py-2 hover:text-primary transition-colors">
-                            {t('nav.contact')}
-                        </button>
+                        </div>
 
-                        {/* Mobile Interactive menu item with special styling */}
-                        <motion.button
+                        <div onClick={() => scrollToSection('projects')} className="text-center py-2 hover:text-primary transition-colors cursor-pointer">
+                            {t('nav.projects')}
+                        </div>
+                        <div onClick={() => scrollToSection('contact')} className="text-center py-2 hover:text-primary transition-colors cursor-pointer">
+                            {t('nav.contact')}
+                        </div>
+
+                        <motion.div
                             onClick={() => scrollToSection('interactive')}
-                            className="py-2 px-4 rounded-md text-accent-foreground font-medium relative overflow-hidden"
+                            className="py-2 px-4 rounded-md text-accent-foreground font-medium relative overflow-hidden cursor-pointer"
                             whileHover="hover"
                             variants={glowVariants}
                         >
-                            <span className="flex items-center gap-1">
+                            <span className={`${theme === 'dark' ? '' : 'text-black'} flex items-center justify-center gap-1`}>
                                 <Sparkles className="h-4 w-4" />
                                 {t('nav.interactive')}
                             </span>
@@ -167,34 +165,31 @@ const Header: React.FC = () => {
                                 className="absolute inset-0 -z-10 opacity-50"
                                 animate={{
                                     background: [
-                                        `linear-gradient(90deg, ${theme === 'dark' ? '#9333ea' : '#c084fc'} 0%, ${theme === 'dark' ? '#4f46e5' : '#818cf8'} 100%)`,
-                                        `linear-gradient(180deg, ${theme === 'dark' ? '#9333ea' : '#c084fc'} 0%, ${theme === 'dark' ? '#4f46e5' : '#818cf8'} 100%)`,
-                                        `linear-gradient(270deg, ${theme === 'dark' ? '#9333ea' : '#c084fc'} 0%, ${theme === 'dark' ? '#4f46e5' : '#818cf8'} 100%)`,
-                                        `linear-gradient(0deg, ${theme === 'dark' ? '#9333ea' : '#c084fc'} 0%, ${theme === 'dark' ? '#4f46e5' : '#818cf8'} 100%)`
+                                        `linear-gradient(90deg, ${theme === 'dark' ? '#9333ea' : '#9333ea'} 0%, ${theme === 'dark' ? '#4f46e5' : '#4f46e5'} 100%)`,
+                                        `linear-gradient(180deg, ${theme === 'dark' ? '#9333ea' : '#9333ea'} 0%, ${theme === 'dark' ? '#4f46e5' : '#4f46e5'} 100%)`,
+                                        `linear-gradient(270deg, ${theme === 'dark' ? '#9333ea' : '#9333ea'} 0%, ${theme === 'dark' ? '#4f46e5' : '#4f46e5'} 100%)`,
+                                        `linear-gradient(0deg, ${theme === 'dark' ? '#9333ea' : '#9333ea'} 0%, ${theme === 'dark' ? '#4f46e5' : '#4f46e5'} 100%)`,
                                     ]
                                 }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                             />
-                        </motion.button>
+                        </motion.div>
 
-                        {/* Mobile Controls */}
                         <div className="flex space-x-4 pt-2">
-                            <button
-                                onClick={toggleLanguage}
-                                className="p-2 rounded-full hover:bg-secondary transition-colors"
-                                aria-label="Toggle language"
-                            >
+                            <div onClick={toggleLanguage} className='flex justify-center items-center cursor-pointer'>
+                                <button
+                                    className="p-2 rounded-full hover:bg-secondary transition-colors"
+                                    aria-label="Toggle language"
+                                >
+                                </button>
                                 <Globe size={20} />
                                 <span className="ml-1">{language.toUpperCase()}</span>
-                            </button>
 
-                            <button
-                                onClick={toggleTheme}
-                                className="p-2 rounded-full hover:bg-secondary transition-colors"
-                                aria-label="Toggle theme"
-                            >
+                            </div>
+                            <div onClick={toggleTheme} className="p-2 rounded-full hover:bg-secondary  transition-colors cursor-pointer"
+                                aria-label="Toggle theme">
                                 {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-                            </button>
+                            </div>
                         </div>
                     </nav>
                 </div>
@@ -204,3 +199,4 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+

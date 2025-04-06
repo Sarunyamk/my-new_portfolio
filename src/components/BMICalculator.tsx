@@ -15,12 +15,12 @@ const BMICalculator = () => {
 
     const calculateBMI = () => {
         const weightNum = parseFloat(weight);
-        const heightNum = parseFloat(height) / 100; // convert cm to m
+        const heightNum = parseFloat(height) / 100;
 
         if (isNaN(weightNum) || isNaN(heightNum) || heightNum === 0) {
             toast({
-                title: t('interactive.bmi.error'),
-                description: t('interactive.bmi.invalidInput'),
+                title: "Error",
+                description: "Please enter valid weight and height.",
                 variant: "destructive",
             });
             return;
@@ -29,7 +29,6 @@ const BMICalculator = () => {
         const bmi = weightNum / (heightNum * heightNum);
         setBmiResult(parseFloat(bmi.toFixed(2)));
 
-        // Categorize BMI
         if (bmi < 18.5) {
             setBmiCategory(t('interactive.bmi.underweight'));
         } else if (bmi < 25) {
@@ -46,44 +45,45 @@ const BMICalculator = () => {
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                     <Calculator className="h-5 w-5" />
-                    {t('interactive.bmi.title')}
+                    {t('interactive.bmi.tab')}
                 </CardTitle>
                 <CardDescription>{t('interactive.bmi.description')}</CardDescription>
             </CardHeader>
             <CardContent>
-                <div className="space-y-4">
+                <div className="space-y-4 ">
                     <div>
                         <label className="block text-sm font-medium mb-1" htmlFor="weight">
-                            {t('interactive.bmi.weight')} (kg)
+                            {t('interactive.bmi.weight')}
                         </label>
                         <input
                             id="weight"
                             type="number"
                             value={weight}
                             onChange={(e) => setWeight(e.target.value)}
-                            className="w-full p-2 border rounded-md"
+                            className="w-full p-2 border rounded-md text-black"
                             placeholder="70"
                         />
                     </div>
                     <div>
                         <label className="block text-sm font-medium mb-1" htmlFor="height">
-                            {t('interactive.bmi.height')} (cm)
+                            {t('interactive.bmi.height')}
                         </label>
                         <input
                             id="height"
                             type="number"
                             value={height}
                             onChange={(e) => setHeight(e.target.value)}
-                            className="w-full p-2 border rounded-md"
+                            className="w-full p-2 border rounded-md text-black"
                             placeholder="170"
                         />
                     </div>
                 </div>
             </CardContent>
             <CardFooter className="flex flex-col items-start">
-                <Button onClick={calculateBMI} className="mb-4">
-                    {t('interactive.bmi.calculate')}
-                </Button>
+
+                <div onClick={calculateBMI} className="px-6 mb-4 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
+                    {t('interactive.bmi.button')}
+                </div>
                 {bmiResult !== null && (
                     <div className="w-full p-4 rounded-md bg-secondary">
                         <p className="font-bold text-lg">

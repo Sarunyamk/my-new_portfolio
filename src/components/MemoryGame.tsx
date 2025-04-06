@@ -1,11 +1,13 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { toast } from '@/hooks/use-toast';
+import {
+    Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle
+} from '@/components/ui/card';
 import { Box, Circle, Square, Star, Heart, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useTheme } from '@/contexts/ThemeContext';
+
 
 interface MemoryCard {
     id: number;
@@ -21,14 +23,15 @@ const MemoryGame: React.FC = () => {
     const [moves, setMoves] = useState(0);
     const [gameStarted, setGameStarted] = useState(false);
     const [gameComplete, setGameComplete] = useState(false);
-    const [bestScore, setBestScore] = useState<number | null>(null);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const { theme } = useTheme();
+    const iconColorClass = theme === 'dark' ? 'text-primary-foreground' : 'text-zinc-800';
 
-    // Define the card icons
+
+
     const cardIcons = ['Box', 'Circle', 'Square', 'Star', 'Heart', 'Zap'];
 
-    // Initialize or reset the game
     const initializeGame = () => {
-        // Create pairs of cards with icons
         const cardPairs = [...cardIcons, ...cardIcons].map((icon, index) => ({
             id: index,
             icon,
@@ -36,167 +39,126 @@ const MemoryGame: React.FC = () => {
             isMatched: false,
         }));
 
-        // Shuffle the cards
         const shuffledCards = cardPairs.sort(() => Math.random() - 0.5);
-
         setCards(shuffledCards);
         setFlippedCards([]);
         setMoves(0);
         setGameStarted(true);
         setGameComplete(false);
+        setIsProcessing(false);
     };
 
-    // Handle card click
     const handleCardClick = (id: number) => {
-        // Ignore click if game is complete or card is already flipped/matched
-        if (gameComplete || cards[id].isFlipped || cards[id].isMatched) {
-            return;
-        }
+        if (gameComplete || isProcessing || flippedCards.length === 2) return;
 
-        // If already have 2 cards flipped and not matched, ignore the click
-        if (flippedCards.length === 2) {
-            return;
-        }
+        const cardIndex = cards.findIndex(card => card.id === id);
+        if (cardIndex === -1 || cards[cardIndex].isFlipped || cards[cardIndex].isMatched) return;
 
-        // Flip the card
         const updatedCards = [...cards];
-        updatedCards[id].isFlipped = true;
+        updatedCards[cardIndex].isFlipped = true;
         setCards(updatedCards);
 
-        // Add the card to flipped cards
         const updatedFlippedCards = [...flippedCards, id];
         setFlippedCards(updatedFlippedCards);
 
-        // If this is the second card flipped
         if (updatedFlippedCards.length === 2) {
-            // Increment moves
-            setMoves(moves + 1);
+            setMoves(prev => prev + 1);
+            setIsProcessing(true);
 
-            // Check if the cards match
-            const [firstCardId, secondCardId] = updatedFlippedCards;
-            if (cards[firstCardId].icon === cards[secondCardId].icon) {
-                // Match found
+            const [firstId, secondId] = updatedFlippedCards;
+            const firstIndex = cards.findIndex(c => c.id === firstId);
+            const secondIndex = cards.findIndex(c => c.id === secondId);
+
+            if (cards[firstIndex].icon === cards[secondIndex].icon) {
                 setTimeout(() => {
                     const matchedCards = [...cards];
-                    matchedCards[firstCardId].isMatched = true;
-                    matchedCards[secondCardId].isMatched = true;
+                    matchedCards[firstIndex].isMatched = true;
+                    matchedCards[secondIndex].isMatched = true;
                     setCards(matchedCards);
                     setFlippedCards([]);
+                    setIsProcessing(false);
 
-                    // Check if game is complete
-                    if (matchedCards.every(card => card.isMatched)) {
-                        setGameComplete(true);
 
-                        // Update best score
-                        if (bestScore === null || moves + 1 < bestScore) {
-                            setBestScore(moves + 1);
-                            toast({
-                                title: t('interactive.memory.newBest'),
-                                description: t('interactive.memory.newBestDesc', { score: moves + 1 }),
-                            });
-                        } else {
-                            toast({
-                                title: t('interactive.memory.complete'),
-                                description: t('interactive.memory.completeDesc', { moves: moves + 1 }),
-                            });
-                        }
-                    }
                 }, 500);
             } else {
-                // No match, flip cards back
                 setTimeout(() => {
-                    const resetFlippedCards = [...cards];
-                    resetFlippedCards[firstCardId].isFlipped = false;
-                    resetFlippedCards[secondCardId].isFlipped = false;
-                    setCards(resetFlippedCards);
+                    const resetCards = [...cards];
+                    resetCards[firstIndex].isFlipped = false;
+                    resetCards[secondIndex].isFlipped = false;
+                    setCards(resetCards);
                     setFlippedCards([]);
+                    setIsProcessing(false);
                 }, 1000);
             }
         }
     };
 
-    // Render the appropriate icon component based on the icon name
-    const renderIcon = (iconName: string) => {
-        switch (iconName) {
-            case 'Box':
-                return <Box className="h-8 w-8" />;
-            case 'Circle':
-                return <Circle className="h-8 w-8" />;
-            case 'Square':
-                return <Square className="h-8 w-8" />;
-            case 'Star':
-                return <Star className="h-8 w-8" />;
-            case 'Heart':
-                return <Heart className="h-8 w-8" />;
-            case 'Zap':
-                return <Zap className="h-8 w-8" />;
-            default:
-                return <Box className="h-8 w-8" />;
-        }
+    const renderIcon = (iconName: string, colorClass: string) => {
+        const IconComponent = {
+            Box, Circle, Square, Star, Heart, Zap
+        }[iconName as keyof typeof import('lucide-react')];
+
+        return IconComponent ? <IconComponent className={`h-10 w-10 sm:h-12 sm:w-12 ${colorClass}`} /> : <Box className="h-10 w-10" />;
     };
+
 
     return (
         <Card>
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                     <Box className="h-5 w-5" />
-                    {t('interactive.memory.title')}
+                    {t('interactive.memory.tab')}
                 </CardTitle>
                 <CardDescription>{t('interactive.memory.description')}</CardDescription>
             </CardHeader>
+
             <CardContent>
                 {!gameStarted ? (
-                    <Button onClick={initializeGame} className="w-full">
+
+                    <div onClick={initializeGame} className="text-center px-6 mb-4 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
                         {t('interactive.memory.start')}
-                    </Button>
+                    </div>
                 ) : (
                     <div className="space-y-4">
-                        <div className="flex justify-between mb-2">
-                            <div className="font-medium">{t('interactive.memory.moves')}: {moves}</div>
-                            {bestScore !== null && (
-                                <div className="font-medium">{t('interactive.memory.best')}: {bestScore}</div>
-                            )}
+                        <div className="flex justify-between mb-2 text-sm font-medium">
+                            <span>{t('interactive.memory.moves')}: {moves}</span>
                         </div>
 
-                        <div className="grid grid-cols-3 gap-2">
+                        <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
                             {cards.map((card) => (
                                 <motion.div
                                     key={card.id}
-                                    className={`aspect-square cursor-pointer rounded-md shadow-md flex items-center justify-center ${card.isMatched ? 'bg-green-100 dark:bg-green-900' : 'bg-primary'
-                                        }`}
+                                    className={`aspect-square rounded-md shadow-md flex items-center justify-center transition-all duration-300
+                    ${card.isMatched ? 'bg-green-700 dark:bg-green-900' :
+                                            card.isFlipped ? 'bg-white dark:bg-zinc-800' : 'bg-primary/70 hover:bg-primary'}
+                    cursor-pointer`}
                                     whileHover={{ scale: card.isMatched || card.isFlipped ? 1 : 1.05 }}
-                                    animate={{
-                                        rotateY: card.isFlipped || card.isMatched ? 180 : 0,
-                                        backgroundColor: card.isMatched ? 'var(--green-100)' : 'var(--primary)'
-                                    }}
+                                    animate={{ rotateY: card.isFlipped || card.isMatched ? 180 : 0 }}
                                     transition={{ duration: 0.5 }}
                                     onClick={() => handleCardClick(card.id)}
                                 >
-                                    <div className="h-full w-full flex items-center justify-center">
-                                        {(card.isFlipped || card.isMatched) && (
-                                            <motion.div
-                                                animate={{ rotateY: 180 }}
-                                                transition={{ duration: 0 }}
-                                                className="text-primary-foreground"
-                                            >
-                                                {renderIcon(card.icon)}
-                                            </motion.div>
-                                        )}
-                                    </div>
+                                    {(card.isFlipped || card.isMatched) && (
+                                        <motion.div
+                                            animate={{ rotateY: 180 }}
+                                            transition={{ duration: 0 }}
+                                        >
+                                            {renderIcon(card.icon, iconColorClass)}
+                                        </motion.div>
+                                    )}
                                 </motion.div>
                             ))}
                         </div>
                     </div>
                 )}
             </CardContent>
+
             <CardFooter className="justify-center">
                 {gameStarted && (
-                    <Button onClick={initializeGame} variant="outline">
+                    <div onClick={initializeGame} className="text-center px-6 mb-4 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
                         {gameComplete
                             ? t('interactive.memory.playAgain')
-                            : t('interactive.memory.restart')
-                        }
-                    </Button>
+                            : t('interactive.memory.restart')}
+                    </div>
                 )}
             </CardFooter>
         </Card>

@@ -1,13 +1,9 @@
 
 import React, { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { motion } from 'framer-motion';
-import { Joystick, Calculator, Gamepad2, Dumbbell, Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { toast } from '@/hooks/use-toast';
-import { useTheme } from '@/contexts/ThemeContext';
+import { Dices, Calculator, Gamepad2, Dumbbell, Sparkles } from 'lucide-react';
 import MemoryGame from './MemoryGame';
 import BMICalculator from './BMICalculator';
 import NumberGuessingGame from './NumberGuessingGame';
@@ -17,7 +13,6 @@ import ColorMatcher from './ColorMatcher';
 
 const InteractiveSection: React.FC = () => {
     const { t } = useLanguage();
-    const { theme } = useTheme();
 
     return (
         <section id="interactive" className="py-20 bg-muted">
@@ -36,26 +31,26 @@ const InteractiveSection: React.FC = () => {
 
                     <Tabs defaultValue="bmi" className="max-w-4xl mx-auto">
                         <TabsList className="grid grid-cols-5 mb-8">
-                            <TabsTrigger value="bmi" className="gap-2">
+                            <TabsTrigger value="bmi" className="gap-2 hover:scale-105 transition duration-300 ">
                                 <Calculator className="h-4 w-4 md:mr-2" />
                                 <span className="hidden md:inline">{t('interactive.bmi.tab')}</span>
                             </TabsTrigger>
-                            <TabsTrigger value="number-game" className="gap-2">
-                                <Joystick className="h-4 w-4 md:mr-2" />
+                            <TabsTrigger value="number-game" className="gap-2 hover:scale-105 transition duration-300">
+                                <Dices className="h-4 w-4 md:mr-2" />
                                 <span className="hidden md:inline">{t('interactive.numberGame.tab')}</span>
                             </TabsTrigger>
-                            <TabsTrigger value="rps" className="gap-2">
+                            <TabsTrigger value="rps" className="gap-2 hover:scale-105 transition duration-300">
                                 <Gamepad2 className="h-4 w-4 md:mr-2" />
                                 <span className="hidden md:inline">{t('interactive.rps.tab')}</span>
                             </TabsTrigger>
-                            <TabsTrigger value="color" className="gap-2">
+                            <TabsTrigger value="color" className="gap-2 hover:scale-105 transition duration-300">
                                 <Sparkles className="h-4 w-4 md:mr-2" />
                                 <span className="hidden md:inline">{t('interactive.colorGame.tab')}</span>
                             </TabsTrigger>
 
-                            <TabsTrigger value="memory" className="gap-2">
+                            <TabsTrigger value="memory" className="gap-2 hover:scale-105 transition duration-300">
                                 <Dumbbell className="h-4 w-4 md:mr-2" />
-                                <span className="hidden md:inline">memory</span>
+                                <span className="hidden md:inline">{t('interactive.memory.tab')}</span>
                             </TabsTrigger>
                         </TabsList>
 
@@ -72,7 +67,6 @@ const InteractiveSection: React.FC = () => {
                             <TabsContent value="color">
                                 <ColorMatcher />
                             </TabsContent>
-
                             <TabsContent value="memory">
                                 <MemoryGame />
                             </TabsContent>

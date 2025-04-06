@@ -4,8 +4,7 @@ export interface Project {
     description: string;
     videoUrl: string;
     githubUrl: string;
-    liveUrl?: string;
+
     technologies: string[];
-    imageUrl: string;
     style: 'standard' | 'modern' | 'creative' | 'futuristic';
 }

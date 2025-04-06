@@ -15,7 +15,7 @@ const ProfileSection: React.FC = () => {
     };
 
     return (
-        <section id="profile" className="max-h-screen pt-40 pb-32 flex items-center">
+        <section id="profile" className="max-h-screen mt-40 pb-32 flex items-center">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row items-center justify-center gap-12">
                     <div className="w-64 h-64 relative perspective-1000">
@@ -74,17 +74,19 @@ const ProfileSection: React.FC = () => {
                         </p>
 
                         <div className="mt-8 flex gap-4 justify-center md:justify-start">
-                            <button className="px-6 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg transition-all">
+                            <div onClick={() => window.open("/resume_030325.pdf", "_blank")} className="px-6 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
                                 {t("button.cv")}
-                            </button>
-                            <button
-                                className="px-6 py-3 bg-secondary text-secondary-foreground rounded-lg shadow-md hover:shadow-lg transition-all"
+                            </div>
+
+                            <div
+                                className="px-6 py-3 bg-secondary text-secondary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 cursor-pointer transition-all"
                                 onClick={() => {
                                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                                 }}
                             >
                                 {t("button.contact")}
-                            </button>
+                            </div>
+
                         </div>
                     </div>
                 </div>

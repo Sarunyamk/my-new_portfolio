@@ -47,22 +47,21 @@ const RockPaperScissors = () => {
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                     <Gamepad2 className="h-5 w-5" />
-                    {t('interactive.rps.title')}
+                    {t('interactive.rps.tab')}
                 </CardTitle>
                 <CardDescription>{t('interactive.rps.description')}</CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="flex justify-center gap-4 mb-6">
                     {choices.map((choice) => (
-                        <Button
+                        <div
                             key={choice}
                             onClick={() => play(choice)}
-                            variant="outline"
-                            className="min-w-[80px]"
+                            className="min-w-[80px] cursor-pointer border border-muted-foreground rounded-lg p-4 flex flex-col items-center justify-center hover:bg-muted-foreground/10 transition duration-300"
                         >
                             {choice === 'rock' ? '🪨' : choice === 'paper' ? '📄' : '✂️'}
                             <span className="sr-only">{choice}</span>
-                        </Button>
+                        </div>
                     ))}
                 </div>
 
@@ -102,9 +101,10 @@ const RockPaperScissors = () => {
                 )}
             </CardContent>
             <CardFooter className="justify-center">
-                <Button onClick={resetGame} variant="outline">
+
+                <div onClick={resetGame} className="px-6 mb-4 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
                     {t('interactive.rps.reset')}
-                </Button>
+                </div>
             </CardFooter>
         </Card>
     );

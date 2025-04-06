@@ -52,17 +52,16 @@ const ColorMatcher = () => {
             setScore(score + 1);
             setFeedback(t('interactive.colorGame.correct'));
             toast({
-                title: t('interactive.colorGame.correctTitle'),
-                description: t('interactive.colorGame.correctDesc'),
+                title: "Good job!",
+                description: "You got it right!",
             });
 
-            // Start new round
             setTimeout(startGame, 1000);
         } else {
             setFeedback(t('interactive.colorGame.wrong'));
             toast({
-                title: t('interactive.colorGame.wrongTitle'),
-                description: t('interactive.colorGame.wrongDesc', { color: targetColor }),
+                title: "Try again!",
+                description: "You got it wrong!",
                 variant: "destructive",
             });
         }
@@ -73,15 +72,15 @@ const ColorMatcher = () => {
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5" />
-                    {t('interactive.colorGame.title')}
+                    {t('interactive.colorGame.tab')}
                 </CardTitle>
                 <CardDescription>{t('interactive.colorGame.description')}</CardDescription>
             </CardHeader>
             <CardContent>
                 {!gameStarted ? (
-                    <Button onClick={startGame} className="w-full">
+                    <div onClick={startGame} className="px-6 mb-4 py-3 bg-primary text-center text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
                         {t('interactive.colorGame.start')}
-                    </Button>
+                    </div>
                 ) : (
                     <div className="space-y-4">
                         <div
@@ -91,14 +90,13 @@ const ColorMatcher = () => {
 
                         <div className="grid grid-cols-2 gap-2">
                             {options.map((color, index) => (
-                                <Button
+                                <div
                                     key={index}
-                                    variant="outline"
-                                    className="h-12 font-mono"
+                                    className="h-12 font-mono cursor-pointer rounded-md flex items-center justify-center border border-primary shadow-md hover:shadow-lg hover:scale-105 transition-all"
                                     onClick={() => checkAnswer(color)}
                                 >
                                     {color}
-                                </Button>
+                                </div>
                             ))}
                         </div>
 
