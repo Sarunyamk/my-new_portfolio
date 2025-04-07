@@ -7,6 +7,7 @@ import {
 import { Box, Circle, Square, Star, Heart, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
+import CustomButton from './CustomButton';
 
 
 interface MemoryCard {
@@ -26,8 +27,6 @@ const MemoryGame: React.FC = () => {
     const [isProcessing, setIsProcessing] = useState(false);
     const { theme } = useTheme();
     const iconColorClass = theme === 'dark' ? 'text-primary-foreground' : 'text-zinc-800';
-
-
 
     const cardIcons = ['Box', 'Circle', 'Square', 'Star', 'Heart', 'Zap'];
 
@@ -154,11 +153,7 @@ const MemoryGame: React.FC = () => {
 
             <CardFooter className="justify-center">
                 {gameStarted && (
-                    <div onClick={initializeGame} className="text-center px-6 mb-4 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
-                        {gameComplete
-                            ? t('interactive.memory.playAgain')
-                            : t('interactive.memory.restart')}
-                    </div>
+                    <CustomButton onClick={initializeGame} text={gameComplete ? t('interactive.memory.playAgain') : t('interactive.memory.restart')} />
                 )}
             </CardFooter>
         </Card>

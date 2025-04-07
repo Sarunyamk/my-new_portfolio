@@ -13,7 +13,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 const Index = () => {
     useEffect(() => {
-        // Add observer for scroll animations
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -25,13 +24,11 @@ const Index = () => {
             { threshold: 0.1 }
         );
 
-        // Observe all sections
         document.querySelectorAll('section').forEach((section) => {
             observer.observe(section);
         });
 
         return () => {
-            // Clean up
             document.querySelectorAll('section').forEach((section) => {
                 observer.unobserve(section);
             });

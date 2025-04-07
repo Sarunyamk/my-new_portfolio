@@ -4,14 +4,12 @@ import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from '@/hooks/use-toast';
 import { Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useTheme } from '@/contexts/ThemeContext';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import CustomButton from './CustomButton';
 
 const ColorMatcher = () => {
     const { t } = useLanguage();
-    const { theme } = useTheme();
     const [targetColor, setTargetColor] = useState('');
     const [options, setOptions] = useState<string[]>([]);
     const [score, setScore] = useState(0);
@@ -38,7 +36,6 @@ const ColorMatcher = () => {
             }
         }
 
-        // Shuffle the options
         colorOptions.sort(() => Math.random() - 0.5);
 
         setTargetColor(correctColor);
@@ -67,6 +64,13 @@ const ColorMatcher = () => {
         }
     };
 
+    const resetGame = () => {
+        setTargetColor('');
+        setOptions([]);
+        setScore(0);
+        setGameStarted(false);
+        setFeedback('')
+    };
     return (
         <Card>
             <CardHeader>
@@ -78,9 +82,8 @@ const ColorMatcher = () => {
             </CardHeader>
             <CardContent>
                 {!gameStarted ? (
-                    <div onClick={startGame} className="px-6 mb-4 py-3 bg-primary text-center text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
-                        {t('interactive.colorGame.start')}
-                    </div>
+
+                    <CustomButton onClick={startGame} text={t('interactive.colorGame.start')} />
                 ) : (
                     <div className="space-y-4">
                         <div
@@ -115,6 +118,14 @@ const ColorMatcher = () => {
                     </div>
                 )}
             </CardContent>
+            {
+                gameStarted && (
+                    <CardFooter className="justify-center">
+
+                        <CustomButton onClick={resetGame} text={t('interactive.rps.reset')} />
+                    </CardFooter>
+                )
+            }
         </Card>
     );
 };

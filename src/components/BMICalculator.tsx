@@ -4,7 +4,7 @@ import { toast } from '@/hooks/use-toast';
 import { Calculator } from 'lucide-react';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import CustomButton from './CustomButton';
 
 const BMICalculator = () => {
     const { t } = useLanguage();
@@ -80,10 +80,7 @@ const BMICalculator = () => {
                 </div>
             </CardContent>
             <CardFooter className="flex flex-col items-start">
-
-                <div onClick={calculateBMI} className="px-6 mb-4 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
-                    {t('interactive.bmi.button')}
-                </div>
+                <CustomButton onClick={calculateBMI} text={t('interactive.bmi.button')} />
                 {bmiResult !== null && (
                     <div className="w-full p-4 rounded-md bg-secondary">
                         <p className="font-bold text-lg">

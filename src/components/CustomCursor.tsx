@@ -47,21 +47,17 @@ const CustomCursor: React.FC = () => {
             setClicked(false);
         };
 
-        // Track when cursor is over clickable elements
         const handleLinkHoverEvents = () => {
             document.querySelectorAll('a, button, [role="button"], input, select, textarea, [tabindex]:not([tabindex="-1"])')
                 .forEach(element => {
                     element.addEventListener('mouseenter', () => setLinkHovered(true));
                     element.addEventListener('mouseleave', () => setLinkHovered(false));
                 });
-
-
         };
 
         addEventListeners();
         handleLinkHoverEvents();
 
-        // Periodically check for new elements added to the DOM
         const linkObserverInterval = setInterval(handleLinkHoverEvents, 2000);
 
         return () => {
@@ -71,7 +67,6 @@ const CustomCursor: React.FC = () => {
         };
     }, []);
 
-    // Define cursor circles with theme-aware colors
     const cursorCircles = theme === 'dark' ? [
         { size: 30, color: 'hsl(var(--primary))', opacity: 0.7, delay: 0, offset: 0 },
         { size: 24, color: 'hsl(var(--accent))', opacity: 0.8, delay: 0.05, offset: 5 },
@@ -86,7 +81,6 @@ const CustomCursor: React.FC = () => {
         { size: 8, color: '#3F51B5', opacity: 1, delay: 0.2, offset: -3 }
     ];
 
-    // Theme-aware orbiting elements
     const orbitColors = theme === 'dark' ?
         ['#9C6FE2', '#5BC7F7', '#FF64BD'] :
         ['#6A1B9A', '#00838F', '#C2185B'];
@@ -127,7 +121,6 @@ const CustomCursor: React.FC = () => {
                 />
             ))}
 
-            {/* Additional orbiting elements */}
             {[0, 1, 2].map((i) => (
                 <motion.div
                     key={`orbit-${i}`}

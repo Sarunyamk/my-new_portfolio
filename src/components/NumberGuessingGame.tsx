@@ -5,6 +5,7 @@ import { toast } from '@/hooks/use-toast';
 import { Joystick } from 'lucide-react';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import CustomButton from './CustomButton';
 const NumberGuessingGame = () => {
     const { t } = useLanguage();
     const [targetNumber, setTargetNumber] = useState(Math.floor(Math.random() * 100) + 1);
@@ -85,14 +86,11 @@ const NumberGuessingGame = () => {
             </CardContent>
             <CardFooter>
                 {!gameWon ? (
-                    <div onClick={handleGuess} className="px-6 mb-4 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
-                        {t('interactive.numberGame.guess')}
-                    </div>
+
+                    <CustomButton onClick={handleGuess} text={t('interactive.numberGame.guess')} />
 
                 ) : (
-                    <div onClick={resetGame} className="px-6 mb-4 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
-                        {t('interactive.numberGame.playAgain')}
-                    </div>
+                    <CustomButton onClick={resetGame} text={t('interactive.numberGame.playAgain')} />
 
                 )}
             </CardFooter>

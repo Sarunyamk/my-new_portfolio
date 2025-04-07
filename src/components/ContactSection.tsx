@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { contactSchema, ContactFormData } from '@/utils/validation';
-import { sendContactForm } from '@/utils/api';
 import { useToast } from '@/hooks/use-toast';
 
 const ContactSection: React.FC = () => {
@@ -22,7 +21,6 @@ const ContactSection: React.FC = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
 
-    // Clear error when user types
     if (errors[name as keyof ContactFormData]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
@@ -32,25 +30,14 @@ const ContactSection: React.FC = () => {
     e.preventDefault();
 
     try {
-      // Validate form data
       contactSchema.parse(formData);
-
-      // Clear errors
       setErrors({});
 
-      // Set loading state
       setIsLoading(true);
-
-      // Submit form
-      await sendContactForm(formData);
-
-      // Show success message
       toast({
         title: t('contact.success'),
-        variant: 'success',
       });
 
-      // Reset form
       setFormData({
         name: '',
         email: '',
@@ -60,13 +47,11 @@ const ContactSection: React.FC = () => {
 
     } catch (error) {
       if (error instanceof Error) {
-        // API error
         toast({
           title: t('contact.error'),
           variant: 'destructive',
         });
       } else {
-        // Validation error
         const formattedErrors: Partial<Record<keyof ContactFormData, string>> = {};
 
         (error as any).errors?.forEach((err: any) => {

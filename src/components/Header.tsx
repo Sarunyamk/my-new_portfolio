@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useLanguage, Language } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Menu, X, Moon, Sun, Globe, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 

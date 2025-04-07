@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Gamepad2 } from 'lucide-react';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import CustomButton from './CustomButton';
 const RockPaperScissors = () => {
     const { t } = useLanguage();
     const [playerChoice, setPlayerChoice] = useState<string | null>(null);
@@ -102,9 +103,7 @@ const RockPaperScissors = () => {
             </CardContent>
             <CardFooter className="justify-center">
 
-                <div onClick={resetGame} className="px-6 mb-4 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
-                    {t('interactive.rps.reset')}
-                </div>
+                <CustomButton onClick={resetGame} text={t('interactive.rps.reset')} />
             </CardFooter>
         </Card>
     );

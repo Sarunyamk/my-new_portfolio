@@ -29,13 +29,13 @@ const ScrollToTopButton: React.FC = () => {
     return (
         <>
             {isVisible && (
-                <button
+                <div
                     onClick={scrollToTop}
-                    className="fixed bottom-6 right-6 p-3 bg-primary text-primary-foreground rounded-full shadow-md hover:shadow-lg transition-all"
+                    className="fixed bottom-6 right-6 p-3 bg-primary text-primary-foreground rounded-full hover:scale-105 shadow-md hover:shadow-lg transition-all cursor-pointer"
                     aria-label="Scroll to top"
                 >
                     <ArrowUp size={20} />
-                </button>
+                </div>
             )}
         </>
     );
