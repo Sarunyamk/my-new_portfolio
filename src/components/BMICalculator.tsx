@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from '@/hooks/use-toast';
 import { Calculator } from 'lucide-react';
-
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import CustomButton from './CustomButton';
 
@@ -12,7 +11,6 @@ const BMICalculator = () => {
     const [height, setHeight] = useState('');
     const [bmiResult, setBmiResult] = useState<number | null>(null);
     const [bmiCategory, setBmiCategory] = useState('');
-
     const calculateBMI = () => {
         const weightNum = parseFloat(weight);
         const heightNum = parseFloat(height) / 100;
@@ -25,7 +23,6 @@ const BMICalculator = () => {
             });
             return;
         }
-
         const bmi = weightNum / (heightNum * heightNum);
         setBmiResult(parseFloat(bmi.toFixed(2)));
 
