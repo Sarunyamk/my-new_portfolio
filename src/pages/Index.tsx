@@ -1,16 +1,15 @@
 
-import React, { useEffect } from 'react';
-import Header from '@/components/Header';
-import ProfileSection from '@/components/ProfileSection';
-import SkillsSection from '@/components/SkillsSection';
-import ProjectsSection from '@/components/ProjectsSection';
-import ContactSection from '@/components/ContactSection';
-import InteractiveSection from '@/components/InteractiveSection';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import InteractiveSection from '@/components/InteractiveSection';
+import ProfileSection from '@/components/ProfileSection';
+import ProjectsSection from '@/components/ProjectsSection';
 import ScrollToTopButton from '@/components/ScrollToTopButton';
+import SkillsSection from '@/components/SkillsSection';
+import { useEffect } from 'react';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import CustomCursor from '@/components/customs/CustomCursor';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Index = () => {
     useEffect(() => {
@@ -51,7 +50,6 @@ const Index = () => {
                     <SkillsSection />
                     <ProjectsSection />
                     <InteractiveSection />
-                    <ContactSection />
                 </motion.main>
             </AnimatePresence>
             <Footer />

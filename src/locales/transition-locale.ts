@@ -34,6 +34,9 @@ export const translations = {
     'projects.name6': 'Static Website with HTML and CSS',
     'projects.detail6':
       'This page is a static page built with HTML and CSS. It is accessible on Desktop, iPad, and Mobile devices.',
+    'projects.name7': '46 Group Company Website',
+    'projects.detail7':
+      'A static corporate website built with Next.js and TypeScript. Includes smooth motion effects, fully responsive design, and SEO optimization.',
 
     'interactive.title': 'Take a Break',
     'interactive.subtitle': 'Break time just got better.',
@@ -133,6 +136,9 @@ export const translations = {
       'เว็บไซต์นี้เป็นแพลตฟอร์มที่แสดงข้อมูลสถานที่ต่างๆ สามารถค้นหาชื่อสถานที่ สามารถล็อกอินผ่านบัญชี Google หรือ Facebook เพื่อใช้งานฟีเจอร์พิเศษ เช่น การกดถูกใจสถานที่ ดูสถานที่ที่กดไลค์ เพิ่มสถานที่ใหม่เพื่อแชร์ได้อีกด้วย',
     'projects.name6': 'หน้าเว็บแบบ HTML และ CSS',
     'projects.detail6':
+      'เว็บไซต์นี้เป็นเว็บไซต์แบบ Static Page ที่ใช้ HTML และ CSS เป็นหลัก รองรับการใช้งานบนอุปกรณ์ Desktop, iPad และ Mobile',
+    'projects.name7': 'เว็บไซต์บริษัท 46 Group',
+    'projects.detail7':
       'เว็บไซต์นี้เป็นเว็บไซต์แบบ Static Page ที่ใช้ HTML และ CSS เป็นหลัก รองรับการใช้งานบนอุปกรณ์ Desktop, iPad และ Mobile',
 
     'interactive.title': 'คลายเครียด ด้วยเกมเล็ก ๆ',

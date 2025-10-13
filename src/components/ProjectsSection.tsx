@@ -64,6 +64,15 @@ const ProjectsSection: React.FC = () => {
       technologies: ['Only HTML and CSS Responsive'],
       style: 'standard',
     },
+    {
+      id: 7,
+      title: t('projects.name7'),
+      description: t('projects.detail7'),
+      videoUrl: 'https://www.youtube.com/embed/2JCPQFZ3CJc?si=ityUg7_9EGHY5qGe',
+      githubUrl: 'https://github.com/Sarunyamk/46group.git',
+      technologies: ['Next.js', 'Typescript', 'TailwindCSS', 'Framer motion', 'Swiper'],
+      style: 'standard',
+    },
   ]
 
   return (
