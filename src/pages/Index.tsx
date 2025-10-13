@@ -8,8 +8,9 @@ import ContactSection from '@/components/ContactSection';
 import InteractiveSection from '@/components/InteractiveSection';
 import Footer from '@/components/Footer';
 import ScrollToTopButton from '@/components/ScrollToTopButton';
-import CustomCursor from '@/components/CustomCursor';
+
 import { AnimatePresence, motion } from 'framer-motion';
+import CustomCursor from '@/components/customs/CustomCursor';
 
 const Index = () => {
     useEffect(() => {
