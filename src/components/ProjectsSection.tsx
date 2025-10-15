@@ -3,6 +3,8 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { Github } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Project } from '@/utils/project'
+import ReactPlayer from 'react-player'
+import Player from './VideoContent'
 
 const arr = [0, 1, 2, 3]
 const ProjectsSection: React.FC = () => {
@@ -70,7 +72,13 @@ const ProjectsSection: React.FC = () => {
       description: t('projects.detail7'),
       videoUrl: 'https://www.youtube.com/embed/2JCPQFZ3CJc?si=ityUg7_9EGHY5qGe',
       githubUrl: 'https://github.com/Sarunyamk/46group.git',
-      technologies: ['Next.js', 'Typescript', 'TailwindCSS', 'Framer motion', 'Swiper'],
+      technologies: [
+        'Next.js',
+        'Typescript',
+        'TailwindCSS',
+        'Framer motion',
+        'Swiper',
+      ],
       style: 'standard',
     },
   ]
@@ -97,7 +105,7 @@ const FuturisticProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 
   return (
     <motion.div
-      className="h-[500px] relative group"
+      className="h-[300px] md:h-[400px] relative group"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
@@ -118,16 +126,8 @@ const FuturisticProjectCard: React.FC<{ project: Project }> = ({ project }) => {
         transition={{ duration: 0.6 }}
       />
 
-      <div className="relative h-2/3 overflow-hidden rounded-t-xl">
-        <iframe
-          width="100%"
-          height="315"
-          src={project.videoUrl}
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="my-4 rounded"
-        ></iframe>
+      <div className="relative h-1/2 md:h-2/3 overflow-hidden rounded-t-xl">
+        <Player videoUrl={project.videoUrl} />
 
         <div className="absolute top-3 left-3 z-10 flex flex-wrap gap-2">
           {project.technologies.slice(0, 5).map((tech, index) => (
@@ -144,7 +144,7 @@ const FuturisticProjectCard: React.FC<{ project: Project }> = ({ project }) => {
         </div>
       </div>
 
-      <div className="p-4 h-1/3 flex flex-col justify-between">
+      <div className="p-4 h-1/2 md:h-1/3 flex flex-col justify-between">
         <motion.p
           className="text-sm text-foreground/80 line-clamp-2"
           animate={{ opacity: isHovered ? 1 : 0.8 }}
@@ -152,7 +152,7 @@ const FuturisticProjectCard: React.FC<{ project: Project }> = ({ project }) => {
           {project.description}
         </motion.p>
 
-        <div className="mt-4 flex justify-center h-1/2 w-full ">
+        <div className="mt-4 flex justify-center h-12 w-full ">
           <motion.div
             className="flex flex-col w-40 items-center justify-center py-2 rounded-lg bg-muted/50 hover:bg-primary/20 transition-colors cursor-pointer"
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
